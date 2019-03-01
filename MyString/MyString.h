@@ -17,11 +17,14 @@ public:
 	MyString(const MyString &);
 	//destructer
 	~MyString();
-	//overloaded operaters
-	void operator = (const MyString &);
+	//This is the overloaded assignment operator function
+	char * operator = (const MyString &);
+	//This is the overloaded + operator function
 	MyString operator + (const MyString &);
+	//This is the overloaded == operator function
 	bool operator == (const MyString &);
-	//accessor function
+	//This is the accessor function
 	const char *c_str();
+	
 	friend ostream &operator << (ostream &strm, const MyString &);
 };

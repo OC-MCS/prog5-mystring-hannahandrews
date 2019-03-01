@@ -1,19 +1,22 @@
-// MyString implementation file
 #include "MyString.h"
 #include <iostream>
 //using namespace std;
 
-//tested and works
-// default constructer
+//================================================
+// This is the default constructer called if a 
+// MyString is not initilized.
+//================================================
 MyString::MyString()
 {
 	word = {'\0'};
 	size = 0;
-	cout << " default called" << endl;
+	//cout << " default called" << endl;
 }
 
-//tested and works
-//initializing constructer
+//==============================================
+// This is the constructer that gets initialized
+// within main.
+//==============================================
 MyString::MyString(char *input)
 {
 	size = strlen(input) +1;
@@ -25,11 +28,12 @@ MyString::MyString(char *input)
 		word[i] = input[i];
 	}
 
-	cout << " Initialized called" << endl;
+	//cout << " Initialized called" << endl;
 }
 
-//tested and works
-//copy constructer
+//============================================
+// This is the copy constructer.
+//============================================
 MyString::MyString(const MyString &other)
 {
 	size = other.size;
@@ -40,9 +44,14 @@ MyString::MyString(const MyString &other)
 	}
 }
 
-//tested and works
-//sets one MyStrings to another 
-void MyString:: operator = (const MyString &other)
+//==================================================
+//char * operator =: This function assigns the value
+//		of other to MyString.
+//return type: char *
+//		word: This is the cstring assigned to the 
+//      MyString on the left of the = operator.
+//==================================================
+char * MyString:: operator = (const MyString &other)
 {
 	if (this != &other)
 	{
@@ -55,10 +64,18 @@ void MyString:: operator = (const MyString &other)
 		}
 
 	}
+	return word;
 }
 
-//tested and works :)
-//adds but doesnt modify 2 MyStrings
+//======================================================
+//MyString operator +: This function adds the contents
+//		of two strings into a third string without
+//		modifying the two initial strings
+// return type: MyString
+//		added : This is the contents of the added
+//				MyStrings. 
+//ERROR FOUND: A space is not being enterd between words.
+//=======================================================
 MyString MyString:: operator + (const MyString &other)
 {
 	MyString added;
@@ -84,9 +101,12 @@ MyString MyString:: operator + (const MyString &other)
 
 	return added;
 }
-
-//tested and works :)
-//tells if two MyStrings are equal
+//===========================================================
+//bool operator ==: This function tells if two MyString's are
+//				equilavent
+//return type : bool
+//		same: This returns true if the functions are the same.
+//===========================================================
 bool MyString:: operator == (const MyString &other)
 {
 	bool same = true;
@@ -102,14 +122,28 @@ bool MyString:: operator == (const MyString &other)
 	return same;
 }
 
-
-//allows << operator function to see word
+//============================================================
+// const char* c_str : This function is what allows the <<
+//			function to view the elements of MyString.
+// return type: const char *
+//			word : This is the cstring within an element
+//			of MyString.
+//============================================================
 const char* MyString::c_str()
 {
 	return word;
 }
 
-//couts a MyString
+//============================================================
+// operator << : This function is not a member of the
+//		class but is a friend of it so it has access
+//		to the class info. This function couts the word 
+//		of the MyString being called.
+// parameters: ostream &, const MyString &
+//		strm: This is variable that MyString is assigned to 
+//		so it can be viewed.
+//		element: This is the MyString being assigned to strm.
+//============================================================
 ostream& operator << (ostream &strm, const MyString &element)
 {
 	for (int i = 0; i < element.size; i++)
@@ -120,8 +154,13 @@ ostream& operator << (ostream &strm, const MyString &element)
 	return strm;
 }
 
+//===================================================
+//~MyString: This is the destructer that clears the
+// dynamically allocated memory used in the class.
+// parameters: none
+//===================================================
 MyString ::~MyString()
 {	
-	cout << "destructer called" << endl;
+	//cout << "destructer called" << endl;
 	delete[] word;
 }
