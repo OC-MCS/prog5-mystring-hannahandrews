@@ -74,30 +74,19 @@ char * MyString:: operator = (const MyString &other)
 // return type: MyString
 //		added : This is the contents of the added
 //				MyStrings. 
-//ERROR FOUND: A space is not being enterd between words.
 //=======================================================
 MyString MyString:: operator + (const MyString &other)
 {
 	MyString added;
 
-	added.size = size + other.size;
+	added.size = size + other.size + 2;
 	added.word = new char[added.size];
 	int i = 0;
-	while (i < size-1)
-	{
-		added.word[i] = word[i];
-		i++;
-	}
 
-	i++;
-	added.word[i] = ' ';
+	strcpy_s(added.word, added.size, word);
+	strcat_s(added.word, added.size, " ");
+	strcat_s(added.word, added.size, other.word);
 
-	int j = 0;
-	while (j < other.size)
-	{
-		added.word[i + j] = other.word[j];
-		j++;
-	}
 
 	return added;
 }
@@ -144,12 +133,11 @@ const char* MyString::c_str()
 //		so it can be viewed.
 //		element: This is the MyString being assigned to strm.
 //============================================================
-ostream& operator << (ostream &strm, const MyString &element)
+ostream& operator << (ostream &strm,  MyString &element)
 {
-	for (int i = 0; i < element.size; i++)
-	{
-		strm << element.word[i];
-	}
+
+
+	strm << element.c_str();
 
 	return strm;
 }

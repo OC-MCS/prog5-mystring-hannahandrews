@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 // MyString class declaration goes here
+class MyString;
+ostream &operator << (ostream &strm, MyString &);
 
 class MyString
 {
@@ -26,5 +28,4 @@ public:
 	//This is the accessor function
 	const char *c_str();
 	
-	friend ostream &operator << (ostream &strm, const MyString &);
 };
